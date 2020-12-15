@@ -1,9 +1,61 @@
-h1{
-    color: rgb(2, 2, 75);
-}
-h2{
-    color: rgb(2, 2, 75);
-}
-p{
-    color: cornflowerblue;
-}
+/* GRID SYSTEM - CSS */
+
+/* Grid System: Settings */
+.grid-settings {
+    position: fixed; 
+    width: 200px;
+    top: 80px;
+    right: 20px; 
+    z-index: 9999; 
+  }
+  
+  /* Grid System: Grids */
+  .grid-system {
+    text-align: center;
+    position: fixed;
+    right: 0;
+    left: 0; 
+    margin-right: auto;
+    margin-left: auto;
+    height: 100vh;
+    z-index: 1;
+    visibility: visible;
+  }
+  .grid-system div[class^="col-"] {
+      border-left: 1px dotted rgba(0, 0, 0, 0.2);
+      height: 100vh;
+  }
+  .grid-system div[class^="col-"]:last-child {
+      border-right: 1px dotted rgba(0, 0, 0, 0.2);
+  }
+  .grid-system .col-div {
+      background-color: rgba(0, 0, 0, 0.025);
+      border: none !important; 
+      padding-top: 15px; 
+      color: rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Grid System: Light Theme */
+  .grid-system.light .col-div { 
+    background-color: rgba(255, 255, 255, 0.025); 
+    color: rgba(255, 255, 255, 0.3);
+  }
+  .grid-system.light div[class^="col-"], 
+  .grid-system.light div[class^="col-"]:last-child { 
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  /* FOR DEMO PURPOSES ONLY: */
+  .bg-dark h1, 
+  .bg-dark h2 {
+    color: #fff;
+  }
+  .bg-dark p {
+    color: rgba(255, 255, 255, .5);
+  }
+  .grid-settings .card-body p {
+    color: #212529;;
+  }
+
+
+  
