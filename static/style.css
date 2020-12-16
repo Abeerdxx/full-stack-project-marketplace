@@ -59,3 +59,56 @@
 
 
   
+  
+  .dm-service-banner{
+    background: #ebf9f9;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 97px 0;
+    position: relative;
+}
+.dm-banner-title{
+    text-align: right;
+    padding: 57px 0px;
+}
+.dm-banner-title .back-box{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 77%;
+    /* background: #fff; */
+    box-shadow: 0px 0px 5px 0px #ddd;
+    background: url('https://www.hummingwebians.com/public/images/dm-small.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.dm-right-corner{
+    width: 149px;
+    height: 86px;
+    background: #67d092;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.dm-banner-title .front-text-box{
+    position: relative;
+    z-index: 1;
+}
+.dm-banner-title h1 {
+    font-size: 57px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    border-bottom: 1px solid #5b945b;
+    padding-bottom: 14px;
+    text-shadow: 3px 3px 1px #d4d1d1;
+    color: #0e4e6d;
+}
+.dm-banner-text{
+    padding: 107px 0px;
+    font-size: 15px;
+    font-weight: 450;
+    color: #34945c;
+}
