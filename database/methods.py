@@ -60,9 +60,14 @@ def insert_item(owner_id, price, info, img_id):
     connection.commit()
 
 
-def insert(owner):
-    insert_owner(owner.name, owner.email, owner.phone, owner.info)
-
+def insert(owner, items):
+    try:
+        owner_id = insert_owner(owner.name, owner.email, owner.phone, owner.info)
+        for item in items:
+            img_id = insert_image(owner_id, item.url)
+            insert_item(owner_id, item.price, item.info, img_id)
+    except OwnerAlreadyExists as e:
+        raise
 
 '''
 owner_id = insert_owner("aa2", "b", 1, "h")
