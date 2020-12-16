@@ -46,6 +46,8 @@ def add_item():
     price = request.args.get('Price')
     item_url = request.args.get('itemUrl')
     description = request.args.get('comment')
+    # busninessType = request.args.get('busninessType')
+    # print(busninessType)
     item = Item(item_name, price, item_url, description)
     items.append(item)
     return Response("", 204)
