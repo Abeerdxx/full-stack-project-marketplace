@@ -16,7 +16,7 @@
                     <div class="card-body">
                         <img src="http://www.ansonika.com/mavia/img/registration_bg.svg" style="width:30%">
                         <h2 class="py-3">Registration</h2>
-                        <p>By submitting this form, Your business well be shared on the market place page.
+                        <p>By submitting this form, Your business will be shared on the market place page.
 
 </p>
                     </div>
@@ -102,7 +102,7 @@
 
 
 
-<form method="post" enctype="multipart/form-data">
+<!-- <form method="post" enctype="multipart/form-data">
  <div>
    <label for="file">Choose file to upload</label>
    <input type="file" id="file" name="file" multiple>
@@ -110,7 +110,7 @@
  <div>
    <button>Submit</button>
  </div>
-</form>
+</form> -->
 
 
 
@@ -118,30 +118,40 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header border-bottom-0">
-          <h5 class="modal-title" id="exampleModalLabel">Create Account</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Add Item</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form>
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="email1">Email address</label>
-              <input type="email" class="form-control" id="email1" aria-describedby="emailHelp" placeholder="Enter email">
-              <small id="emailHelp" class="form-text text-muted">Your information is safe with us.</small>
-            </div>
-            <div class="form-group">
-              <label for="password1">Password</label>
-              <input type="password" class="form-control" id="password1" placeholder="Password">
-            </div>
-            <div class="form-group">
-              <label for="password1">Confirm Password</label>
-              <input type="password" class="form-control" id="password2" placeholder="Confirm Password">
-            </div>
-          </div>
-          <div class="modal-footer border-top-0 d-flex justify-content-center">
-            <button type="submit" class="btn btn-success">Submit</button>
-          </div>
+        <form method="GET" action="/add_item">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                  <input  type="text" name="itemName" placeholder="Item Name" class="form-control" type="text">
+                 
+                </div>
+                <div class="form-group col-md-6" name = "email">
+                  <input type="text" name="Price" class="form-control" id="inputEmail4" placeholder="Item Price">
+                </div>
+                <div class="form-group col-md-12">
+                    <input  type="text" name="itemUrl" placeholder="Image Url" class="form-control" type="text">
+                   
+                  </div>
+              </div>
+           
+         
+                <div class="form-group col-md-12">
+                          <textarea id="comment" name="comment"  placeholder="Description" cols="40" rows="5" class="form-control"></textarea>
+                          <br>
+                          <div class = "text-center">
+                          <input type="submit" class="btn btn-info " value="Add"/>
+                        </div>
+                </div>
+                
+                
+            
+          
+
+           
         </form>
       </div>
     </div>

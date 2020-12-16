@@ -25,6 +25,16 @@ def do_search():
    
     return "form_data: {0}, {1}, {2}, {3}".format(full_name, email, phone_number ,description)
 
+@app.route("/add_item", methods = ['GET'])
+def add_item():
+    item_name = request.args.get('itemName')
+    price = request.args.get('Price')
+    item_url = request.args.get('itemUrl')
+    description = request.args.get('comment')
+    
+
+   
+    return "form_data: {0}, {1}, {2}, {3}".format(item_name, price, item_url ,description)
 
 @app.route('/register', methods=['POST'])
 def upload_file():
