@@ -30,7 +30,8 @@ def do_search():
     email = request.args.get('email')
     phone_number = request.args.get('mobileNo')
     description = request.args.get('comment')
-    owner = Owner(full_name, email, phone_number, description)
+    busninessType = request.args.get('busninessType')
+    owner = Owner(full_name, email, phone_number, description, busninessType)
     try:
         insert(owner, items)
     except OwnerAlreadyExists as e:
@@ -46,7 +47,6 @@ def add_item():
     price = request.args.get('Price')
     item_url = request.args.get('itemUrl')
     description = request.args.get('comment')
-    busninessType = request.args.get('busninessType')
     item = Item(item_name, price, item_url, description)
     items.append(item)
     return Response("", 204)
