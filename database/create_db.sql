@@ -1,5 +1,7 @@
 create database business_db;
 
+use business_db;
+
 create table owners(
 	id int not null primary key auto_increment,
     name varchar(255),
@@ -17,10 +19,11 @@ create table images(
 	foreign key (owner_id) references owners(id)
 );
 
-create table item(
+create table items(
 	id int not null primary key auto_increment,
 	img_id int,
     owner_id int,
+    name varchar(255),
     price int,
     info varchar(255),
     foreign key (owner_id) references owners(id),
