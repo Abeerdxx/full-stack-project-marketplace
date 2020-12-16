@@ -5,7 +5,7 @@ create table owners(
     name varchar(255),
     email varchar(255),
     phone varchar(50),
-    catagories varchar(255),
+    categories varchar(255),
     img_url varchar(255),
     info varchar(255)
 );
