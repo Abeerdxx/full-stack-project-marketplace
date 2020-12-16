@@ -25,23 +25,89 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> --
 
 
 </head>
+<nav class="navbar navbar-light bg-light px-0">
+  <div class="container-fluid">
+      <script>
+          businesses = [
+            {
+              'id':'1',
+              'name':'Akko Sweets',
+              'email':'akkosweets@gmail.com',
+              'phone':'0528529817',
+              'business type':'Sweets',
+              'profile image':'https://media.timeout.com/images/103700330/750/422/image.jpg',
+              'description':'Local sweets from akko'
+            },
+            {
+              'id':'2',
+              'name':'The Fat Duck',
+              'email':'thefatduck@gmail.com',
+              'phone':'0524971850',
+              'business type':'British Cuisine',
+              'profile image':'https://www.thefatduckgroup.com/wp-content/uploads/2018/10/home-square-3.jpg',
+              'description':'British cuisine dishes by Heston Blumenthal'
+            },
+            {
+              'id':'3',
+              'name':'PETRUS',
+              'email':'petrus@gmail.com',
+              'phone':'0549718064',
+              'business type':'French Cuisine',
+              'profile image':'https://static01.nyt.com/images/2019/12/13/dining/mc-beef-wellington/mc-beef-wellington-articleLarge.jpg',
+              'description':'French cuisine dishes by Gordon Ramsey'
+            },
+            {
+              'id':'4',
+              'name':'PETRUS',
+              'email':'petrus@gmail.com',
+              'phone':'0549718064',
+              'business type':'French Cuisine',
+              'profile image':'https://static01.nyt.com/images/2019/12/13/dining/mc-beef-wellington/mc-beef-wellington-articleLarge.jpg',
+              'description':'French cuisine dishes by Gordon Ramsey'
+            }
+          ]
+
+          window.onload = show_businesses_data;
+
+          function show_businesses_data(){
+            businesses.forEach(business => {
+              var businesses_row = document.getElementById('businesses_row');
+              businesses_row.innerHTML +=
+                '<div class="col-md-4">' +
+                  '<h2>' + business["name"] + '</h2>' +
+                  '<img src="' + business["profile image"] + '" alt="' + business["name"] + '" style="width: 90%"></img>' +
+                  '<p>' + business["business type"] + '</p>' +
+                  '<p>' + business["description"] + '</p>' +
+                  '<p>' + business["phone"] + '</p>' +
+                  '<p>' + business["email"] + '</p>' +
+                '</div>';
+            });
+          }
+
+      </script>
 
 
 <main role="main">
    
 
-  <!-- Jumbotron -->
-  <div class="jumbotron px-0">
-    
-   
-
-       
-    <div class="container">
+<section class="pt-5 pb-5 mt-0 align-items-center d-flex bg-dark" style="height:100vh; background-size: cover; background-image: url(https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-0.3.5&s=c3d0603820b595592d80f5a239938c67&auto=format&fit=crop&w=1500&q=80);">
+  
+    <div class="container-fluid">
         <div class="text-right">
-        <p><a class="btn btn-success btn-lg"  role="button" href="/register" >Register</a></p>
-    </div>
-      <h1 class="display-3">Business market</h1>
-      <p>Explore and support small business to thrive. </p>
+            <p><a class="btn btn-success btn-lg"  role="button" href="/register" >Register</a></p>
+        </div>
+       <div class="row  justify-content-center align-items-center d-flex text-center h-100">
+         <div class="col-12 col-md-8  h-50 ">
+             <h1 class="display-2  text-light mb-2 mt-5"><strong>Business market</strong> </h1>
+             <p class="lead  text-light mb-5">Explore and support small business to thrive.</p>
+ 
+                 
+         </div>
+          
+      
+     </div>
+     </section>
+<hr>
       <div class="container">
         <div class="row">
             <div class="dropdown">
@@ -57,29 +123,15 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> --
               
         </div>
     </div>
-  </div>
+    <hr>
+ 
     </div>
  
   
 
   <div class="container">
     <!-- Example row of columns -->
-    <div class="row">
-      <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn btn-secondary" href="/about" role="button">View details »</a></p>
-      </div>
-      <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn btn-secondary" href="/about" role="button">View details »</a></p>
-      </div>
-      <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
-      </div>
+    <div class="row" id="businesses_row">
     </div>
 
     <hr>
