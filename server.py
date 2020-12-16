@@ -25,6 +25,7 @@ def about():
 
 @app.route("/submit", methods=['GET'])
 def do_search():
+    global items
     full_name = request.args.get('fullName')
     email = request.args.get('email')
     phone_number = request.args.get('mobileNo')
@@ -34,6 +35,7 @@ def do_search():
         insert(owner, items)
     except OwnerAlreadyExists as e:
         return "owner already exists"
+    items = []
     return "form_data: {0}, {1}, {2}, {3}".format(full_name, email, phone_number, description)
 
 
