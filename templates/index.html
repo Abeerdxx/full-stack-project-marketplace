@@ -28,10 +28,62 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> --
 <nav class="navbar navbar-light bg-light px-0">
   <div class="container-fluid">
       <script>
-          [1, 2, 3].forEach(element => {
-              console.log(element)
-              
-          });
+          businesses = [
+            {
+              'id':'1',
+              'name':'Akko Sweets',
+              'email':'akkosweets@gmail.com',
+              'phone':'0528529817',
+              'business type':'Sweets',
+              'profile image':'https://media.timeout.com/images/103700330/750/422/image.jpg',
+              'description':'Local sweets from akko'
+            },
+            {
+              'id':'2',
+              'name':'The Fat Duck',
+              'email':'thefatduck@gmail.com',
+              'phone':'0524971850',
+              'business type':'British Cuisine',
+              'profile image':'https://www.thefatduckgroup.com/wp-content/uploads/2018/10/home-square-3.jpg',
+              'description':'British cuisine dishes by Heston Blumenthal'
+            },
+            {
+              'id':'3',
+              'name':'PETRUS',
+              'email':'petrus@gmail.com',
+              'phone':'0549718064',
+              'business type':'French Cuisine',
+              'profile image':'https://static01.nyt.com/images/2019/12/13/dining/mc-beef-wellington/mc-beef-wellington-articleLarge.jpg',
+              'description':'French cuisine dishes by Gordon Ramsey'
+            },
+            {
+              'id':'4',
+              'name':'PETRUS',
+              'email':'petrus@gmail.com',
+              'phone':'0549718064',
+              'business type':'French Cuisine',
+              'profile image':'https://static01.nyt.com/images/2019/12/13/dining/mc-beef-wellington/mc-beef-wellington-articleLarge.jpg',
+              'description':'French cuisine dishes by Gordon Ramsey'
+            }
+          ]
+
+          window.onload = show_businesses_data;
+
+          function show_businesses_data(){
+            businesses.forEach(business => {
+              var businesses_row = document.getElementById('businesses_row');
+              businesses_row.innerHTML +=
+                '<div class="col-md-4">' +
+                  '<h2>' + business["name"] + '</h2>' +
+                  '<img src="' + business["profile image"] + '" alt="' + business["name"] + '" style="width: 90%"></img>' +
+                  '<p>' + business["business type"] + '</p>' +
+                  '<p>' + business["description"] + '</p>' +
+                  '<p>' + business["phone"] + '</p>' +
+                  '<p>' + business["email"] + '</p>' +
+                '</div>';
+            });
+          }
+
       </script>
 
   <p><a class="btn btn-primary btn-lg"  role="button" data-toggle="modal" data-target="#form" >Register</a></p>
@@ -67,22 +119,7 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> --
 
   <div class="container">
     <!-- Example row of columns -->
-    <div class="row">
-      <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn btn-secondary" href="/about" role="button">View details »</a></p>
-      </div>
-      <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn btn-secondary" href="/about" role="button">View details »</a></p>
-      </div>
-      <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
-      </div>
+    <div class="row" id="businesses_row">
     </div>
 
     <hr>
