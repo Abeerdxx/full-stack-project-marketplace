@@ -10,7 +10,7 @@ class OwnerDoesntExist(Exception):
     pass
 
 
-def insert_owner(name, email, phone, info):
+def insert_owner(name, email, phone, info, cat):
     with connection.cursor() as cursor:
         query = f"SELECT * FROM owners where name = '{name}' and phone = '{phone}'"
         cursor.execute(query)
@@ -18,7 +18,8 @@ def insert_owner(name, email, phone, info):
         if result is not None:
             raise OwnerAlreadyExists()
         else:
-            query = f"INSERT INTO owners (name, phone, email, info) VALUES ('{name}', '{phone}', '{email}', '{info}')"
+            query = f"INSERT INTO owners (name, phone, email, info, categories) VALUES ('{name}', '{phone}', '{email}', '{info}'," \
+                    f"'{cat}')"
             cursor.execute(query)
             connection.commit()
         query = f"SELECT * FROM owners where name = '{name}' and phone = '{phone}'"
@@ -63,7 +64,7 @@ def insert_item(owner_id, price, info, name, img_id):
 
 def insert(owner, items):
     try:
-        owner_id = insert_owner(owner.name, owner.email, owner.phone, owner.info)
+        owner_id = insert_owner(owner.name, owner.email, owner.phone, owner.info, owner.cat)
         for item in items:
             img_id = insert_image(owner_id, item.url)
             insert_item(owner_id, item.price, item.info, item.name, img_id)

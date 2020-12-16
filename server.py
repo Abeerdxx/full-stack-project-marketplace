@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, url_for,Response
 from objects.owner import Owner
 from objects.item import Item
-from database.methods import insert, OwnerAlreadyExists
+from database.methods import insert, OwnerAlreadyExists, get_owners
 import os
 
 app = Flask(__name__, static_url_path='', static_folder='static', template_folder='templates')
@@ -10,7 +10,8 @@ items = []
 
 @app.route('/')
 def root():
-    return render_template('index.html')
+    owners = get_owners()
+    return render_template('index.html', owners=owners)
 
 
 @app.route('/register')
@@ -30,7 +31,8 @@ def do_search():
     email = request.args.get('email')
     phone_number = request.args.get('mobileNo')
     description = request.args.get('comment')
-    owner = Owner(full_name, email, phone_number, description)
+    busninessType = request.args.get('busninessType')
+    owner = Owner(full_name, email, phone_number, description, busninessType)
     try:
         insert(owner, items)
     except OwnerAlreadyExists as e:
@@ -46,7 +48,6 @@ def add_item():
     price = request.args.get('Price')
     item_url = request.args.get('itemUrl')
     description = request.args.get('comment')
-    busninessType = request.args.get('busninessType')
     item = Item(item_name, price, item_url, description)
     items.append(item)
     return Response("", 204)
