@@ -124,26 +124,28 @@
           </button>
         </div>
         <form method="GET" action="/add_item">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                  <input  type="text" name="itemName" placeholder="Item Name" class="form-control" type="text">
-                 
-                </div>
-                <div class="form-group col-md-6" name = "email">
-                  <input type="text" name="Price" class="form-control" id="inputEmail4" placeholder="Item Price">
-                </div>
-                <div class="form-group col-md-12">
-                    <input  type="text" name="itemUrl" placeholder="Image Url" class="form-control" type="text">
-                   
-                  </div>
-              </div>
+         
            
          
                 <div class="form-group col-md-12">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <input  type="text" name="itemName" placeholder="Item Name" class="form-control" type="text">
+                         
+                        </div>
+                        <div class="form-group col-md-6" name = "email">
+                          <input type="text" name="Price" class="form-control" id="inputEmail4" placeholder="Item Price">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <input  type="text" name="itemUrl" placeholder="Image Url" class="form-control" type="text">
+                           
+                          </div>
+                      </div>
                           <textarea id="comment" name="comment"  placeholder="Description" cols="40" rows="5" class="form-control"></textarea>
                           <br>
                           <div class = "text-center">
-                          <input type="submit" class="btn btn-info " data-dismiss="modal" value="Add"/>
+                          <input type="submit" class="btn btn-success " value="Add"/>
+                          <input type="submit" class="btn btn-danger " data-dismiss="modal" value="Close"/>
                         </div>
                 </div>
                 
