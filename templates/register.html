@@ -48,6 +48,15 @@
                         </div>
                     </div>
                     <div class="form-row">
+                        <!-- <div class="form-group">
+                            <input #file type="file" accept="image/*"   multiple>
+                        </div> -->
+                        <div class="form-group col-md-6">
+                            <input  type="text" name="ulr" placeholder="Image Url" class="form-control" type="text">
+                           
+                          </div>
+                    </div>
+                    <div class="form-row">
                         <div class="form-group">
                             <div class="form-group">
                                 <div class="form-check">
@@ -60,11 +69,7 @@
                     
                           </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <input #file type="file" accept="image/*"   multiple>
-                        </div>
-                    </div>
+                  
                     
                     <div class="form-row">
                         
@@ -79,3 +84,12 @@
 
 
 
+<form method="post" enctype="multipart/form-data">
+ <div>
+   <label for="file">Choose file to upload</label>
+   <input type="file" id="file" name="file" multiple>
+ </div>
+ <div>
+   <button>Submit</button>
+ </div>
+</form>
