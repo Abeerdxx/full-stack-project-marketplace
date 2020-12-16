@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request, url_for,Response
 from objects.owner import Owner
 from objects.item import Item
 from database.methods import insert, OwnerAlreadyExists
@@ -46,7 +46,7 @@ def add_item():
     description = request.args.get('comment')
     item = Item(item_name, price, item_url, description)
     items.append(item)
-    return "form_data: {0}, {1}, {2}, {3}".format(item_name, price, item_url, description)
+    return Response("", 204)
 
 
 @app.route('/register', methods=['POST'])
