@@ -53,9 +53,10 @@ on inserting the owner, should also get an item (class or dict),
 '''
 
 
-def insert_item(owner_id, price, info, img_id):
+def insert_item(owner_id, price, info, name, img_id):
     with connection.cursor() as cursor:
-        query = f"INSERT INTO items (owner_id, price, info, img_id) VALUES ({owner_id}, {price}, '{info}', {img_id})"
+        query = f"INSERT INTO items (owner_id, price, info, img_id, name) VALUES ({owner_id}, {price}, '{info}'" \
+                f", {img_id}, '{name}')"
         cursor.execute(query)
     connection.commit()
 
@@ -65,7 +66,7 @@ def insert(owner, items):
         owner_id = insert_owner(owner.name, owner.email, owner.phone, owner.info)
         for item in items:
             img_id = insert_image(owner_id, item.url)
-            insert_item(owner_id, item.price, item.info, img_id)
+            insert_item(owner_id, item.price, item.info, item.name, img_id)
     except OwnerAlreadyExists as e:
         raise
 
