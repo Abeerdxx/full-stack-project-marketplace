@@ -1,4 +1,5 @@
 from config import connection
+from objects.owner import Owner
 
 
 class OwnerAlreadyExists(Exception):
@@ -44,6 +45,7 @@ def insert_image(owner_id, img_url):
         result = cursor.fetchone()
         return result["id"]
 
+
 '''
 for item in items:
     insert_item(item)
@@ -56,6 +58,11 @@ def insert_item(owner_id, price, info, img_id):
         query = f"INSERT INTO items (owner_id, price, info, img_id) VALUES ({owner_id}, {price}, '{info}', {img_id})"
         cursor.execute(query)
     connection.commit()
+
+
+def insert(owner):
+    insert_owner(owner.name, owner.email, owner.phone, owner.info)
+
 
 '''
 owner_id = insert_owner("aa2", "b", 1, "h")
