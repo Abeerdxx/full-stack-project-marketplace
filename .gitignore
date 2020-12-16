@@ -6,5 +6,5 @@ images/
 objects/__pycache__
 database/__pycache__
 static/*.jpg
-config
+config.py
 WhatsApp Image 2020-12-16 at 10.24.27.jpeg
