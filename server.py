@@ -48,7 +48,7 @@ def add_item():
     description = request.args.get('comment')
     item = Item(item_name, price, item_url, description)
     items.append(item)
-    return "form_data: {0}, {1}, {2}, {3}".format(item_name, price, item_url, description)
+    #return "form_data: {0}, {1}, {2}, {3}".format(item_name, price, item_url, description)
 
 
 @app.route('/register', methods=['POST'])
