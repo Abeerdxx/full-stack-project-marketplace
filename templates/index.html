@@ -119,10 +119,50 @@
   <div class="container">
     <!-- Example row of columns -->
     <div class="row" id="businesses_row">
+        <tbody>
+        {% for owner in owners %}
+            <div class="col-md-4">
+                <h2>{{owner.name}}</h2>
+                <img src ={{owner.img_url}} style="width:90%">
+                <p>{{owner.categories}}</p>
+                <p>{{owner.info}}</p>
+                <p>{{owner.phone}}</p>
+                <p>{{owner.email}}</p>
+
+            </div>
+
+        <div class="container">
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src={{owner.img_url}}>
+                    <div class="card-block">
+                        <h4 class="card-title">{{owner.name}}</h4>
+                        <div class="meta">
+                            <a>{{owner.categories}}</a>
+                        </div>
+                        <div class="card-text">
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="float-right">Joined in 2013</span>
+                        <span><i class=""></i>{{owner.info}}</span>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+</div>
+
+
+        {% endfor %}
+
+</tbody>
     </div>
-
-
-
 
 
 

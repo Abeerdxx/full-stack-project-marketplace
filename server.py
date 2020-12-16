@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, url_for,Response
 from objects.owner import Owner
 from objects.item import Item
-from database.methods import insert, OwnerAlreadyExists
+from database.methods import insert, OwnerAlreadyExists, get_owners
 import os
 
 app = Flask(__name__, static_url_path='', static_folder='static', template_folder='templates')
@@ -10,7 +10,8 @@ items = []
 
 @app.route('/')
 def root():
-    return render_template('index.html')
+    owners = get_owners()
+    return render_template('index.html', owners=owners)
 
 
 @app.route('/register')
