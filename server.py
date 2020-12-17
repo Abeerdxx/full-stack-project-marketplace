@@ -39,7 +39,8 @@ def do_search():
     except OwnerAlreadyExists as e:
         return "owner already exists"
     items = []
-    return "form_data: {0}, {1}, {2}, {3}".format(full_name, email, phone_number, description)
+    owners = get_owners()
+    return render_template('index.html', owners=owners)
 
 
 @app.route("/add_item", methods=['GET'])
