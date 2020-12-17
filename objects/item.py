@@ -1,6 +1,6 @@
 class Item:
-    def __init__(self, name, price, url, info):
+    def __init__(self, name, price, img_url, info):
         self.name = name
         self.price = price
-        self.url = url
+        self.img_url = img_url
         self.info = info

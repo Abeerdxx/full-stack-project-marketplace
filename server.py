@@ -43,11 +43,13 @@ def do_search():
     global items
     full_name = request.args.get('fullName')
     email = request.args.get('email')
+    city = request.args.get('city')
+    zip_code = request.args.get('zip_code')
     phone_number = request.args.get('mobileNo')
-    description = request.args.get('comment')
     busninessType = request.args.get('busninessType')
+    description = request.args.get('comment')
     img_url = request.args.get('itemUrl')
-    owner = Owner(full_name, email, phone_number, description, busninessType, img_url)
+    owner = Owner(full_name, email, city, zip_code, phone_number, busninessType, description, img_url)
     try:
         insert(owner, items)
     except OwnerAlreadyExists as e:
@@ -73,8 +75,8 @@ def add_item():
 def upload_file():
     uploaded_file = request.files['file']
     if uploaded_file.filename != '':
-        url = os.path.join('Images/', uploaded_file.filename)
-        a = uploaded_file.save(url)
+        img_url = os.path.join('Images/', uploaded_file.filename)
+        a = uploaded_file.save(img_url)
 
     return ""
 

@@ -10,7 +10,7 @@ class OwnerDoesntExist(Exception):
     pass
 
 
-def insert_owner(name, email, phone, info, cat, url):
+def insert_owner(name, email, city, zip_code, phone, cat, info, img_url):
     with connection.cursor() as cursor:
         query = f"SELECT * FROM owners where name = '{name}' and phone = '{phone}'"
         cursor.execute(query)
@@ -18,8 +18,7 @@ def insert_owner(name, email, phone, info, cat, url):
         if result is not None:
             raise OwnerAlreadyExists()
         else:
-            query = f"INSERT INTO owners (name, phone, email, info, categories, img_url) VALUES ('{name}', '{phone}', '{email}', '{info}'," \
-                    f"'{cat}', '{url}')"
+            query = f"INSERT INTO owners (name, email, city, zip_code, phone, categories, info, img_url) VALUES ('{name}', '{email}', '{city}', '{zip_code}', '{phone}', '{cat}', '{info}', '{img_url}')"
             cursor.execute(query)
             connection.commit()
         query = f"SELECT * FROM owners where name = '{name}' and phone = '{phone}'"
@@ -65,26 +64,26 @@ on inserting the owner, should also get an item (class or dict),
 '''
 
 
-def insert_item(owner_id, price, info, name, img_id):
+def insert_item(owner_id, price, info, name, img_url):
     with connection.cursor() as cursor:
-        query = f"INSERT INTO items (owner_id, price, info, img_id, name) VALUES ({owner_id}, {price}, '{info}'" \
-                f", {img_id}, '{name}')"
+        query = f"INSERT INTO items (owner_id, price, info, img_url, name) VALUES ({owner_id}, {price}, '{info}'" \
+                f", {img_url}, '{name}')"
         cursor.execute(query)
     connection.commit()
 
 
 def insert(owner, items):
     try:
-        owner_id = insert_owner(owner.name, owner.email, owner.phone, owner.info, owner.cat, owner.url)
+        owner_id = insert_owner(owner.name, owner.email, owner.city, owner.zip_code, owner.phone, owner.cat, owner.info, owner.img_url)
         for item in items:
-            img_id = insert_image(owner_id, item.url)
-            insert_item(owner_id, item.price, item.info, item.name, img_id)
+            img_url = insert_image(owner_id, item.img_url)
+            insert_item(owner_id, item.price, item.info, item.name, img_url)
     except OwnerAlreadyExists as e:
         raise
 
 '''
 owner_id = insert_owner("aa2", "b", 1, "h")
-img_id = insert_image(owner_id, "https://images.fairtrade.net/product/infosite_flowers_18043_1440.jpg")
-insert_item(owner_id, 2, "jj", img_id)
+img_url = insert_image(owner_id, "https://images.fairtrade.net/product/infosite_flowers_18043_1440.jpg")
+insert_item(owner_id, 2, "jj", img_url)
 #print(get_owners())
 '''

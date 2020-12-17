@@ -1,8 +1,10 @@
 class Owner:
-    def __init__(self, name, email, phone, info, cat, img_url):
+    def __init__(self, name, email, city, zip_code, phone, cat, info, img_url):
         self.name = name
         self.email = email
+        self.city = city
+        self.zip_code = zip_code
         self.phone = phone
-        self.info = info
         self.cat = cat
-        self.url = img_url
+        self.info = info
+        self.img_url = img_url
