@@ -45,18 +45,20 @@
 
     </section>
 
-    <div class="text-center">
-
-      <div class="alert alert-info">
-        <h3><a class="display-3 text-dark" role="button" href="/register"><strong>Register your own business</strong></a></h3>
-      </div>
-
-    </div>
+  
 
     <hr>
       <div class="container">
+      
+
+     
+          
+        
+      
         <div class="row">
-         <div class="dropdown">
+         
+         <div class="dropdown col-md-10">
+
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               {% for cat in categories %}
@@ -64,6 +66,9 @@
               {% endfor %}
             </div>
          </div>
+         <div class="col-md-2 text-right">
+         <a class=" btn btn-warning" role="button" href="/register">Register business</a>
+        </div>
         </div>
       </div>
     <hr>
@@ -73,7 +78,7 @@
     <div class="container">
       <div class="row" id="businesses_row">
         {% for owner in owners %}
-          <div class="col-md-4">
+          <div class="col-md-4" style="margin-top: 2%;">
             <div class="card">
               <img class="card-img-top" src={{owner.img_url}} style="height: 50vh;">
               <div class="card-block">
