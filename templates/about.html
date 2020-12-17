@@ -26,9 +26,7 @@
         <form method="post">
             <div class="row">
                 <div class="col-md-4">
-                    <div class="profile-img">
-                        <img src="{{owner.img_url}}" alt=""/>
-                    </div>
+                    <img class="card-img-top" src={{owner.img_url}} style="height: 50vh">
                 </div>
                 <div class="col-md-6">
                     <div class="profile-head">
@@ -43,6 +41,50 @@
                                 <a class="nav-link active" id="home-tab" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">About</a>
                             </li>
                         </ul>
+                        <div class="col-md-8">
+                            <div class="tab-content profile-tab" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Email</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{owner.email}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Phone</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{owner.phone}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>City</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{owner.city}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>ZIP Code</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{owner.zip_code}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>{{owner.info}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -51,50 +93,7 @@
                     <div class="profile-work">
                     </div>
                 </div>
-                <div class="col-md-8">
-                    <div class="tab-content profile-tab" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Email</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>{{owner.email}}</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Phone</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>{{owner.phone}}</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>City</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>{{owner.city}}</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>ZIP Code</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p>{{owner.zip_code}}</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>{{owner.info}}</label>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
+                
             </div>
         </form>
         
@@ -102,13 +101,12 @@
     <div class="container">
         <div class="row" id="businesses_row">
             {% for item in owner_items %}
-            <div class="col-md-4">
+            <div class="col-md-4" style="margin-bottom: 2%;">
                 <div class="card">
                 <img class="card-img-top" src={{item.img_url}} style="height: 50vh;">
                 <div class="card-block">
                     <h4 class="card-title text-center">{{item.name}}</h4>
-                    <div class="meta">
-
+                    <div class="meta" style="margin-left: 5%;">
                     <a>{{owner.categories}}</a>
 
                     <div style="font-size: 20px;" class="text-right">
@@ -121,7 +119,6 @@
                 </div>
 
                 <div class="card-footer">
-                    <a class="btn btn-success btn-md float-right" role="button" href="/about?id={{item.id}}">Visit page</a>
                     <span><i class=""></i>{{item.info}}</span>
                 </div>
                 
