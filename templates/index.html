@@ -59,11 +59,9 @@
          <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="/category?cat=Fitness">Fitness</a>
-              <a class="dropdown-item" href="/category?cat=Educational">Educational</a>
-              <a class="dropdown-item" href="/category?cat=Beauty">Beauty</a>
-              <a class="dropdown-item" href="/category?cat=Other">Other</a>
-              <a class="dropdown-item" href="/">All</a>
+              {% for cat in categories %}
+                  <a href = "/category?cat={{ cat }}" class = "dropdown-item"> {{ cat }} </a>
+              {% endfor %}
             </div>
          </div>
         </div>
