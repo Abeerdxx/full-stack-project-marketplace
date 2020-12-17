@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, url_for, Response
 from objects.owner import Owner
 from objects.item import Item
-from database.methods import insert, OwnerAlreadyExists, get_owners , get_items
+from database.methods import insert, OwnerAlreadyExists, get_owners, get_items, get_categories
 import os
 
 app = Flask(__name__, static_url_path='', static_folder='static', template_folder='templates')
@@ -12,8 +12,9 @@ items = []
 @app.route('/')
 def root():
     owners = get_owners()
-    categories = ["Fitness", "Beauty"]
-    return render_template('index.html', owners=owners,categories=categories)
+    categories = [x['categories'] for x in get_categories()]
+    categories.append("All")
+    return render_template('index.html', owners=owners, categories=categories)
 
 
 @app.route('/register')
@@ -23,19 +24,23 @@ def register():
 
 @app.route('/about')
 def about():
-  
     id = request.args.get('id')
     owner_items = get_items(id)
-  
+
     print(owner_items)
-    return render_template('about.html',owner_items=owner_items)
+    return render_template('about.html', owner_items=owner_items)
 
 
 @app.route('/category')
 def sort_category():
     cat = request.args.get('cat')
-    owners = get_owners(cat)
-    return render_template('index.html', owners=owners)
+    if cat == 'All':
+        owners = get_owners()
+    else:
+        owners = get_owners(cat)
+    categories = [x['categories'] for x in get_categories()]
+    categories.append("All")
+    return render_template('index.html', owners=owners, categories=categories)
 
 
 @app.route("/submit", methods=['GET'])

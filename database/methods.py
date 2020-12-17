@@ -37,14 +37,22 @@ def get_owners(cat=None):
         cursor.execute(query)
         result = cursor.fetchall()
         return result
-        
+
+
 def get_items(owner_id):
     with connection.cursor() as cursor:
         query = f"SELECT * FROM items  where owner_id = '{owner_id}'"
         cursor.execute(query)
         result = cursor.fetchall()
-        return result        
+        return result
 
+
+def get_categories():
+    with connection.cursor() as cursor:
+        query = f"SELECT categories FROM owners"
+        cursor.execute(query)
+        result = cursor.fetchall()
+        return result
 
 
 def insert_image(owner_id, img_url):
@@ -81,6 +89,7 @@ def insert(owner, items):
             insert_item(owner_id, item.price, item.info, item.name, img_id)
     except OwnerAlreadyExists as e:
         raise
+
 
 '''
 owner_id = insert_owner("aa2", "b", 1, "h")
