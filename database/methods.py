@@ -38,6 +38,15 @@ def get_owners(cat=None):
         return result
 
 
+def get_owner(id):
+    with connection.cursor() as cursor:
+        query = f"SELECT * FROM owners where id = {id}"
+        cursor.execute(query)
+        result = cursor.fetchone()
+        return result
+
+
+
 def get_items(owner_id):
     with connection.cursor() as cursor:
         query = f"SELECT * FROM items  where owner_id = '{owner_id}'"
@@ -75,7 +84,7 @@ on inserting the owner, should also get an item (class or dict),
 def insert_item(owner_id, price, info, name, img_url):
     with connection.cursor() as cursor:
         query = f"INSERT INTO items (owner_id, price, info, img_url, name) VALUES ({owner_id}, {price}, '{info}'" \
-                f", {img_url}, '{name}')"
+                f", '{img_url}', '{name}')"
         cursor.execute(query)
     connection.commit()
 
