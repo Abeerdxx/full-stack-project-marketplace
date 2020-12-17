@@ -29,7 +29,7 @@
     />
   </head>
 
-  <body>
+  <body style="background-color: #d9cac1;">
     <section class="pt-5 pb-5 mt-0 align-items-center d-flex bg-dark" style="height:62vh; background-image: url(https://searchengineland.com/figz/wp-content/seloads/2018/09/small-biz-smb-ss-1920-800x450.jpg);">
 
       <div class="container-fluid">
@@ -84,13 +84,19 @@
               <div class="card-block">
                 <h4 class="card-title text-center">{{owner.name}}</h4>
                 <div class="meta">
-
-                  <a>{{owner.categories}}</a>
-
-                  <div style="font-size: 20px;" class="text-right">
-                    <a href="#" title="Phone"><i class="fa fa-phone-square fa-10x"></i></a>
-                    <a href="mailto:{{owner.email}}" title="Email"><i class="fa fa-envelope-square fa-10x"></i></a>
+                  <div class="row">
+                    <div class="col-md-10">
+                      <a>{{owner.categories}}</a>
+                    </div>
+                    
+                    <div class="col-md-1">
+                      <div style="font-size: 20px;" class="text-right">
+                        <a href="mailto:{{owner.email}}" title="Email"><i class="fa fa-envelope-square fa-10x"></i></a>
+                      </div>
+                    </div>
                   </div>
+
+                  
 
                 </div>
 
