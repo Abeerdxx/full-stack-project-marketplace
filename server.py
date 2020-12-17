@@ -14,7 +14,7 @@ def root():
     owners = get_owners()
     categories = [x['categories'] for x in get_categories()]
     categories.append("All")
-    return render_template('index.html', owners=owners, categories=categories)
+    return render_template('index.html', owners=owners, categories=list(set(categories)))
 
 
 @app.route('/register')
@@ -40,7 +40,7 @@ def sort_category():
         owners = get_owners(cat)
     categories = [x['categories'] for x in get_categories()]
     categories.append("All")
-    return render_template('index.html', owners=owners, categories=categories)
+    return render_template('index.html', owners=owners, categories=list(set(categories)))
 
 
 @app.route("/submit", methods=['GET'])
