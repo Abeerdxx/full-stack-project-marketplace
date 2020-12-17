@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, url_for,Response
 from objects.owner import Owner
 from objects.item import Item
-from database.methods import insert, OwnerAlreadyExists, get_owners
+from database.methods import insert, OwnerAlreadyExists, get_owners , get_items
 import os
 
 app = Flask(__name__, static_url_path='', static_folder='static', template_folder='templates')
@@ -21,7 +21,12 @@ def register():
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
+  
+    id = request.args.get('id')
+    owner_items = get_items(id)
+  
+    print(owner_items)
+    return render_template('about.html',owner_items=owner_items)
 
 
 @app.route("/submit", methods=['GET'])

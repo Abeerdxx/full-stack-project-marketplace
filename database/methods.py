@@ -34,6 +34,13 @@ def get_owners():
         cursor.execute(query)
         result = cursor.fetchall()
         return result
+        
+def get_items(owner_id):
+    with connection.cursor() as cursor:
+        query = f"SELECT * FROM items  where owner_id = '{owner_id}'"
+        cursor.execute(query)
+        result = cursor.fetchall()
+        return result        
 
 
 def insert_image(owner_id, img_url):
