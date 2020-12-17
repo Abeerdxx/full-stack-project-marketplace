@@ -1,3 +1,6 @@
+
+import * as mysql from 'mysql';
+
 businesses = [
     {
       'id':'1',
@@ -40,6 +43,22 @@ businesses = [
  
 
   function show_businesses_data(){
+    var con = mysql.createConnection({
+      host: "localhost",
+      user: "root",
+      password: "",
+      database: "business_db"
+    });
+    
+    con.connect(function(err) {
+      if (err) throw err;
+      con.query("SELECT * FROM owners", function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+        console.log(result);
+      });
+    });
+
     businesses.forEach(business => {
       var businesses_row = document.getElementById('businesses_row');
       businesses_row.innerHTML +=
