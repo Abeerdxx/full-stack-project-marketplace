@@ -32,7 +32,8 @@ def do_search():
     phone_number = request.args.get('mobileNo')
     description = request.args.get('comment')
     busninessType = request.args.get('busninessType')
-    owner = Owner(full_name, email, phone_number, description, busninessType)
+    img_url = request.args.get('itemUrl')
+    owner = Owner(full_name, email, phone_number, description, busninessType, img_url)
     try:
         insert(owner, items)
     except OwnerAlreadyExists as e:
