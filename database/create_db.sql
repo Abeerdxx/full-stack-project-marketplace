@@ -15,9 +15,8 @@ create table owners(
 );
 
 create table images(
-	id int not null primary key auto_increment,
 	owner_id int,
-    img_url varchar(255),
+    img_url varchar(255) primary key,
 	foreign key (owner_id) references owners(id)
 );
 
@@ -29,5 +28,5 @@ create table items(
     price int,
     info varchar(255),
     foreign key (owner_id) references owners(id),
-    foreign key (img_url) references images(id)
+    foreign key (img_url) references images(img_url)
 );

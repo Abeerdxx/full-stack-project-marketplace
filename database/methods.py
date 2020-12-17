@@ -68,10 +68,6 @@ def insert_image(owner_id, img_url):
         query = f"INSERT INTO images (owner_id, img_url) VALUES ({owner_id}, '{img_url}')"
         cursor.execute(query)
         connection.commit()
-        query = f"SELECT id FROM images where owner_id = '{owner_id}' and img_url = '{img_url}'"
-        cursor.execute(query)
-        result = cursor.fetchone()
-        return result["id"]
 
 
 '''
@@ -93,8 +89,8 @@ def insert(owner, items):
     try:
         owner_id = insert_owner(owner.name, owner.email, owner.city, owner.zip_code, owner.phone, owner.cat, owner.info, owner.img_url)
         for item in items:
-            img_url = insert_image(owner_id, item.img_url)
-            insert_item(owner_id, item.price, item.info, item.name, img_url)
+            insert_image(owner_id, item.img_url)
+            insert_item(owner_id, item.price, item.info, item.name, item.img_url)
     except OwnerAlreadyExists as e:
         raise
 
