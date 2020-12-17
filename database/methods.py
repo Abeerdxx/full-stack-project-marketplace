@@ -39,6 +39,7 @@ def get_owners(cat=None):
         return result
 
 
+
 def insert_image(owner_id, img_url):
     with connection.cursor() as cursor:
         query = f"INSERT INTO images (owner_id, img_url) VALUES ({owner_id}, '{img_url}')"
