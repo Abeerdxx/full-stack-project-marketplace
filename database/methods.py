@@ -28,9 +28,12 @@ def insert_owner(name, email, phone, info, cat, url):
         return result["id"]
 
 
-def get_owners():
+def get_owners(cat=None):
     with connection.cursor() as cursor:
-        query = f"SELECT * FROM owners"
+        if cat is None:
+            query = f"SELECT * FROM owners"
+        else:
+            query = f"SELECT * FROM owners where categories = '{cat}'"
         cursor.execute(query)
         result = cursor.fetchall()
         return result
@@ -41,6 +44,7 @@ def get_items(owner_id):
         cursor.execute(query)
         result = cursor.fetchall()
         return result        
+
 
 
 def insert_image(owner_id, img_url):

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for,Response
+from flask import Flask, render_template, request, url_for, Response
 from objects.owner import Owner
 from objects.item import Item
 from database.methods import insert, OwnerAlreadyExists, get_owners , get_items
@@ -8,10 +8,12 @@ app = Flask(__name__, static_url_path='', static_folder='static', template_folde
 
 items = []
 
+
 @app.route('/')
 def root():
     owners = get_owners()
-    return render_template('index.html', owners=owners)
+    categories = ["Fitness", "Beauty"]
+    return render_template('index.html', owners=owners,categories=categories)
 
 
 @app.route('/register')
@@ -27,6 +29,13 @@ def about():
   
     print(owner_items)
     return render_template('about.html',owner_items=owner_items)
+
+
+@app.route('/category')
+def sort_category():
+    cat = request.args.get('cat')
+    owners = get_owners(cat)
+    return render_template('index.html', owners=owners)
 
 
 @app.route("/submit", methods=['GET'])
