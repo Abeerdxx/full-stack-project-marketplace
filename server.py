@@ -1,37 +1,47 @@
-from flask import Flask, render_template, request, url_for, Response
+from flask import Flask, render_template, request, session, Response, redirect, url_for
 from objects.owner import Owner
+from objects.user import User
 from objects.item import Item
-from database.methods import insert, OwnerAlreadyExists, get_owners, get_items, get_categories, get_owner
+from database.methods import *
 import os
 
 app = Flask(__name__, static_url_path='', static_folder='static', template_folder='templates')
-
+app.secret_key = "BL0ckN0nAdmIN"
 items = []
 
 
 @app.route('/')
 def root():
+    template = "masterpage.html"
+    if "user_email" in session:
+        template = "masterpage_loggedin.html"
     owners = get_owners()
     categories = [x['categories'] for x in get_categories()]
     categories.append("All")
-    return render_template('index.html', owners=owners, categories=list(set(categories)))
+    return render_template('index.html', owners=owners, categories=list(set(categories)), var=template)
 
 
 @app.route('/register')
 def register():
-    return render_template('register.html')
+    return render_template('main_register.html')
+
+
+@app.route('/logout')
+def logout():
+    session.pop('user_email', None)
+    return redirect(url_for('root'))
 
 
 @app.route('/about')
 def about():
-    id = request.args.get('id')
+    email = request.args.get('em')
     owner_items = None
     try:
-        owner_items = get_items(id)
+        owner_items = get_items(email)
     except:
         pass
-    owner = get_owner(id)
-    return render_template('about.html', owner_items=owner_items, owner=owner)
+    owner = get_owner(email)
+    return render_template('about_owner.html', owner_items=owner_items, owner=owner)
 
 
 @app.route('/category')
@@ -43,7 +53,28 @@ def sort_category():
         owners = get_owners(cat)
     categories = [x['categories'] for x in get_categories()]
     categories.append("All")
-    return render_template('index.html', owners=owners, categories=list(set(categories)))
+    template = "masterpage.html"
+    if "user_email" in session:
+        template = "masterpage_loggedin.html"
+    return render_template('index.html', owners=owners, categories=list(set(categories)), var=template)
+
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+
+@app.route('/login/user')
+def login_user():
+    email = request.args.get('email')
+    password = request.args.get('password')
+    try:
+        res = is_owner(email, password)
+        if res:
+            session['user_email'] = email
+    except OwnerDoesntExist:
+        return root()
+    return root()
 
 
 @app.route("/submit", methods=['GET'])
@@ -57,14 +88,31 @@ def do_search():
     busninessType = request.args.get('busninessType')
     description = request.args.get('comment')
     img_url = request.args.get('itemUrl')
-    owner = Owner(full_name, email, city, zip_code, phone_number, busninessType, description, img_url)
+    password = request.args.get('password')
+    owner = Owner(full_name, email, city, zip_code, phone_number, busninessType, description, img_url, password)
     try:
-        insert(owner, items)
-    except OwnerAlreadyExists as e:
-        return "owner already exists"
+        insert(owner, 0, items)
+    except UserAlreadyExists as e:
+        return "User already exists"
     items = []
-    owners = get_owners()
-    return render_template('index.html', owners=owners)
+    return root()
+
+
+@app.route("/user_submit")
+def register_user():
+    full_name = request.args.get('fullName')
+    email = request.args.get('email')
+    city = request.args.get('city')
+    zip_code = request.args.get('userzip_code')
+    phone_number = request.args.get('usermobileNo')
+    img_url = request.args.get('itemUrl')
+    password = request.args.get('password')
+    user = User(full_name, email, city, zip_code, phone_number, img_url, password)
+    try:
+        insert(user, 1)
+    except UserAlreadyExists as e:
+        return "User already exists"
+    return root()
 
 
 @app.route("/add_item", methods=['GET'])
