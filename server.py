@@ -8,13 +8,10 @@ import os
 app = Flask(__name__, static_url_path='', static_folder='static', template_folder='templates')
 app.secret_key = "BL0ckN0nAdmIN"
 items = []
-
+template = "masterpage.html"
 
 @app.route('/')
 def root():
-    template = "masterpage.html"
-    if "user_email" in session:
-        template = "masterpage_loggedin.html"
     owners = get_owners()
     categories = [x['categories'] for x in get_categories()]
     categories.append("All")
@@ -28,7 +25,9 @@ def register():
 
 @app.route('/logout')
 def logout():
+    global template
     session.pop('user_email', None)
+    template = "masterpage.html"
     return redirect(url_for('root'))
 
 
@@ -53,9 +52,6 @@ def sort_category():
         owners = get_owners(cat)
     categories = [x['categories'] for x in get_categories()]
     categories.append("All")
-    template = "masterpage.html"
-    if "user_email" in session:
-        template = "masterpage_loggedin.html"
     return render_template('index.html', owners=owners, categories=list(set(categories)), var=template)
 
 
@@ -66,12 +62,14 @@ def login():
 
 @app.route('/login/user')
 def login_user():
+    global template
     email = request.args.get('email')
     password = request.args.get('password')
     try:
         res = is_owner(email, password)
         if res:
             session['user_email'] = email
+            template = "masterpage_loggedin.html"
     except OwnerDoesntExist:
         return root()
     return root()

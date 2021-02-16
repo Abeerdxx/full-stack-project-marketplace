@@ -89,9 +89,9 @@ def insert_new(obj, type_):  # type_ is binary: 0 -> business owner, 1 -> client
 def get_owners(cat=None):
     with connection.cursor() as cursor:
         if cat is None:
-            query = f"SELECT * FROM owners"
+            query = f"select * from users join owners on owners.email=users.email"
         else:
-            query = f"SELECT * FROM owners where categories = '{cat}'"
+            query = f"select * from users join owners on owners.email=users.email where owners.categories = '{cat}'"
         cursor.execute(query)
         result = cursor.fetchall()
         return result
@@ -99,9 +99,13 @@ def get_owners(cat=None):
 
 def get_owner(email):
     with connection.cursor() as cursor:
-        query = f"SELECT * FROM owners join users on owners.email=users.owner where users.owner = '{email}'"
+        query = f"SELECT * FROM users where email = '{email}'"
         cursor.execute(query)
         result = cursor.fetchone()
+        if result["type"] == '0':
+            query = f"SELECT * FROM owners join users on owners.email=users.owner where users.owner = '{email}'"
+            cursor.execute(query)
+            result = cursor.fetchone()
         return result
 
 
@@ -123,14 +127,14 @@ def get_categories():
 
 def insert_image(owner_em, img_url):
     with connection.cursor() as cursor:
-        query = f"INSERT INTO images (owner, img_url) VALUES ({owner_em}, '{img_url}')"
+        query = f"INSERT INTO images (owner, img_url) VALUES ('{owner_em}', '{img_url}')"
         cursor.execute(query)
         connection.commit()
 
 
 def insert_item(owner_em, price, info, name, img_url):
     with connection.cursor() as cursor:
-        query = f"INSERT INTO items (owner, price, info, img_url, name) VALUES ({owner_em}, {price}, '{info}'" \
+        query = f"INSERT INTO items (owner, price, info, img_url, name) VALUES ('{owner_em}', {price}, '{info}'" \
                 f", '{img_url}', '{name}')"
         cursor.execute(query)
     connection.commit()
