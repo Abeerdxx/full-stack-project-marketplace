@@ -75,7 +75,7 @@ def login_user():
     return root()
 
 
-@app.route("/submit", methods=['GET'])
+@app.route("/register/owner", methods=['GET'])
 def do_search():
     global items
     full_name = request.args.get('fullName')
@@ -93,10 +93,10 @@ def do_search():
     except UserAlreadyExists as e:
         return "User already exists"
     items = []
-    return root()
+    return redirect(url_for('root'))
 
 
-@app.route("/user_submit")
+@app.route("/register/user")
 def register_user():
     full_name = request.args.get('fullName')
     email = request.args.get('email')
@@ -109,8 +109,8 @@ def register_user():
     try:
         insert(user, 1)
     except UserAlreadyExists as e:
-        return "User already exists"
-    return root()
+        return Response("User already exists")
+    return redirect(url_for('root'))
 
 
 @app.route("/add_item", methods=['GET'])
