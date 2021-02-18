@@ -1,64 +1,72 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<!DOCTYPE html>
+<html>
+{% extends "masterpage_loggedin.html"%}
 
+<head>
+    {% block title %}
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    {% endblock %}
+</head>
+<body>
+{% block body %}
 <div class="container">
   <div class="row">
      <div id="legend">
-        <legend class="">Register</legend>
+        <legend class="">Edit Item</legend>
      </div>
+  </div>
+    <div class="row">
      <div class="col-md-3">
         <div class="control-group">
-              <label class="control-label" for="email">Avatar</label>
               <div class="controls">
-                <img class="img-thumbnail avatar"  src="http://www.w3schools.com/bootstrap/cinqueterre.jpg" height="250" width="250"/>
-                <b
+                <img class="img-thumbnail avatar"  src="{{item.img_url}}" height="250" width="250"/>
               </div>
         </div>
     </div>
 
      <div class="col-md-6">
 
-          <form class="form-horizontal" action="" method="POST">
+          <form class="form-horizontal" action="/edit/{{item.name}}" method="POST">
           <fieldset>
 
             <div class="control-group">
-              <label class="control-label" for="username">Username</label>
+              <label class="control-label" for="name">Name</label>
               <div class="controls">
-                <input type="text" id="username" name="username" placeholder="" class="form-control input-lg">
-                <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+                <input type="text" id="name" name="name" placeholder="{{item.name}}" class="form-control input-lg">
+                  <br>
               </div>
             </div>
 
             <div class="control-group">
-              <label class="control-label" for="email">E-mail</label>
+              <label class="control-label" for="price">Price</label>
               <div class="controls">
-                <input type="email" id="email" name="email" placeholder="" class="form-control input-lg">
-                <p class="help-block">Please provide your E-mail</p>
+                <input type="text" id="price" name="price" placeholder="{{item.price}}" class="form-control input-lg">
+                  <br>
               </div>
             </div>
 
             <div class="control-group">
-              <label class="control-label" for="password">Password</label>
+              <label class="control-label" for="img_url">Image URL</label>
               <div class="controls">
-                <input type="password" id="password" name="password" placeholder="" class="form-control input-lg">
-                <p class="help-block">Password should be at least 6 characters</p>
+                <input type="text" id="img_url" name="img_url" placeholder="{{item.img_url}}" class="form-control input-lg">
+                  <br>
               </div>
             </div>
 
             <div class="control-group">
-              <label class="control-label" for="password_confirm">Password (Confirm)</label>
+              <label class="control-label" for="info">Info</label>
               <div class="controls">
-                <input type="password" id="password_confirm" name="password_confirm" placeholder="" class="form-control input-lg">
-                <p class="help-block">Please confirm password</p>
+                <input type="text" id="info" name="info" placeholder="{{item.info}}" class="form-control input-lg">
+                  <br>
               </div>
             </div>
 
             <div class="control-group">
               <!-- Button -->
               <div class="controls">
-                <button class="btn btn-success">Register</button>
+                <button class="btn btn-success">Save changes</button>
               </div>
             </div>
           </fieldset>
@@ -67,3 +75,6 @@
     </div>
   </div>
 </div>
+{% endblock %}
+</body>
+</html>

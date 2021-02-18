@@ -112,7 +112,9 @@
                     <div class="meta" style="margin-left: 5%;">
                     <a>{{owner.categories}}</a>
                     <div style="font-size: 20px;" class="text-right">
-                        <a href="#"><i class="fa fa-pencil fa-fw"></i></a>
+                        {% if session["user_email"] == owner.email %}
+                            <a href="edit/{{item.name}}"><i class="fa fa-pencil fa-fw"></i></a>
+                        {% endif %}
                         <a href="mailto:{{owner.email}}" title="Email"><i class="fa fa-envelope-square fa-10x"></i></a>
                     </div>
 

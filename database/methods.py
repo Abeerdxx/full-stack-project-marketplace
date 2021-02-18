@@ -109,12 +109,34 @@ def get_owner(email):
         return result
 
 
-def get_items(owner_em):
+def get_items(owner_em, item_name=None):
     with connection.cursor() as cursor:
-        query = f"SELECT * FROM items where owner = '{owner_em}'"
+        if item_name:
+            query = f"SELECT * FROM items where owner = '{owner_em}' and name = '{item_name}'"
+        else:
+            query = f"SELECT * FROM items where owner = '{owner_em}'"
         cursor.execute(query)
         result = cursor.fetchall()
         return result
+
+
+def update_item(item_attr, email, name):
+    with connection.cursor() as cursor:
+        query = f"update items set "
+        for key, val in item_attr.items():
+            if val:
+                query += f"{key} = '{val}', "
+        query = query.strip(', ')
+        query += f" where owner = '{email}' and name = '{name}'"
+        cursor.execute(query)
+        connection.commit()
+
+
+def update_img(new_url, prev_url):
+    with connection.cursor() as cursor:
+        query = f"update images set img_url = '{new_url}' where img_url = '{prev_url}'"
+        cursor.execute(query)
+        connection.commit()
 
 
 def get_categories():
@@ -143,12 +165,9 @@ def insert_item(owner_em, price, info, name, img_url):
 def insert(person, type_, items=None):
     try:
         if type_ == 0:
-            # owner_id = insert_owner(owner.name, owner.email, owner.city, owner.zip_code, owner.phone, owner.img_url,
-            #                         owner.cat,
-            #                         owner.info, owner.hashed_pass)
             owner_em = insert_new(person, 0)
             for item in items:
-                insert_image(owner_em, item.img_url)
+                #insert_image(owner_em, item.img_url)
                 insert_item(owner_em, item.price, item.info, item.name, item.img_url)
         else:
             insert_new(person, 1)

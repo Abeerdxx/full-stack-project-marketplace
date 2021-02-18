@@ -10,6 +10,7 @@ app.secret_key = "BL0ckN0nAdmIN"
 items = []
 template = "masterpage.html"
 
+
 @app.route('/')
 def root():
     owners = get_owners()
@@ -21,6 +22,21 @@ def root():
 @app.route('/register')
 def register():
     return render_template('main_register.html')
+
+
+@app.route('/edit/<name>', methods=['GET'])
+def edit(name):
+    item = get_items(session["user_email"], name)[0]
+    return render_template('edit_item.html', item=item)
+
+
+@app.route('/edit/<name>', methods=['POST'])
+def edit_item(name):
+    data = request.form
+    # if data["img_url"]:
+    #     update_img(data["img_url"])
+    update_item(data, session["user_email"], name)
+    return redirect(url_for('about', em=session["user_email"]))
 
 
 @app.route('/logout')
