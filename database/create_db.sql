@@ -11,7 +11,7 @@ create table owners(
 create table users(
 	id int not null primary key auto_increment,
     name varchar(255),
-    email varchar(255),
+    email varchar(255) UNIQUE,
     city varchar(255),
     zip_code varchar(255),
     phone varchar(50),
@@ -36,4 +36,11 @@ create table items(
     info varchar(255),
     foreign key (owner_id) references owners(id),
     foreign key (img_url) references images(img_url)
+);
+
+create table Messages(
+    receiver int,
+    sender varchar(255),
+    msg varchar(255),
+    foreign key (receiver) references users(email)
 );

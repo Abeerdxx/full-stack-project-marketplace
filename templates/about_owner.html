@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
-
+{% extends var%}
 <head>
+    {% block title %}
     <link
         href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
         rel="stylesheet"
@@ -19,12 +20,12 @@
         href="about.css"
     />
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    {% endblock %}
 </head>
 
 <body>
-    <div class="col-md-2 text-left" style="margin-top: 2%;">
-        <a class=" btn btn-success" role="button" href="/">Main page</a>
-    </div>
+{% block body %}
+
     <div class="container emp-profile">
         <form method="post">
             <div class="row">
@@ -115,7 +116,6 @@
                         {% if session["user_email"] == owner.email %}
                             <a href="edit/{{item.name}}"><i class="fa fa-pencil fa-fw"></i></a>
                         {% endif %}
-                        <a href="mailto:{{owner.email}}" title="Email"><i class="fa fa-envelope-square fa-10x"></i></a>
                     </div>
 
                     </div>
@@ -135,7 +135,7 @@
         </div>
         </tbody>
         </div>
-
+{% endblock %}
 </body>
 
 </html>

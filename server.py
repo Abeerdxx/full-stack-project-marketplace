@@ -3,10 +3,12 @@ from objects.owner import Owner
 from objects.user import User
 from objects.item import Item
 from database.methods import *
+from loginrsa import *
 import os
 
 app = Flask(__name__, static_url_path='', static_folder='static', template_folder='templates')
 app.secret_key = "BL0ckN0nAdmIN"
+app.config['SECRET_KEY'] = app.secret_key
 items = []
 template = "masterpage.html"
 
@@ -56,7 +58,32 @@ def about():
     except:
         pass
     owner = get_owner(email)
-    return render_template('about_owner.html', owner_items=owner_items, owner=owner)
+    return render_template('about_owner.html', owner_items=owner_items, owner=owner, var=template)
+
+@app.route('/compare')
+def compare():
+    left = request.args.get('left')
+    right = request.args.get('right')
+    left_items = None
+    right_items = None
+    try:
+        left_items = get_items(left)
+        right_items = get_items(right)
+    except:
+        pass
+    left_owner = get_owner(left)
+    right_owner = get_owner(right)
+    return render_template('comparison.html', var=template, left_items=left_items, right_items=right_items, left_owner=left_owner, right_owner=right_owner)
+
+@app.route('/messages')
+def messages():
+    email = request.args.get('em')
+    messages = None
+    # try:
+    # owner_items = get_items(email)
+    # except:
+    # pass
+    return render_template('messages.html', var=template)
 
 
 @app.route('/category')
@@ -76,11 +103,12 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/login/user')
+@app.route('/login', methods=['POST'])
 def login_user():
     global template
-    email = request.args.get('email')
-    password = request.args.get('password')
+    data = request.form
+    email = data["email"]
+    password = data["password"]
     try:
         res = is_owner(email, password)
         if res:
